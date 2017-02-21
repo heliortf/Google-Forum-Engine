@@ -1,6 +1,7 @@
 from google.appengine.ext import ndb
 from model.user import ForumUser
-from model.topic import Topic
+from model.forum import Forum
+from model.category import Category
 
 """
     Topic Model
@@ -15,6 +16,9 @@ class Topic(ndb.Model):
 
     # Category
     category = ndb.StructuredProperty(Category)
+
+    # Last Message
+    last_message = ndb.StructuredProperty(Forum)
 
     num_messages = ndb.IntegerProperty()
     num_views = ndb.IntegerProperty()

@@ -11,7 +11,7 @@ class Forum(ndb.Model):
     title = ndb.StringProperty(required=True)
     description = ndb.StringProperty(required=True)
     created_by = ndb.StructuredProperty(ForumUser, required=True)
-
+    
     
     created_at = ndb.DateTimeProperty(auto_now_add=True)
     updated_at = ndb.DateTimeProperty(auto_now_add=True)
