@@ -184,6 +184,9 @@ definitions:
       numMessages:
         type: number
         format: integer
+      signature:
+        type: string
+      
       createdAt: 
         type: string
         description: When user was created
@@ -219,6 +222,30 @@ definitions:
         type: number
         format: integer
         description: Number of visualizations on this topic
+      createdAt: 
+        type: string
+        description: When user was created
+      updatedAt:
+        type: string
+        description: When user was updated
+        
+  Forum:
+    type: object
+    properties:
+      innerType:
+        type: string
+        enum:
+          - FORUM
+          - ANNOUNCEMENT
+          - MESSAGE
+      title:
+        type: string
+        description: Forum title
+      createdBy:
+        $ref: '#/definitions/ForumUser'
+      description:
+        type: string
+        description: Forum description
       createdAt: 
         type: string
         description: When user was created

@@ -1,5 +1,6 @@
 from google.appengine.ext import ndb
 from model.user import ForumUser
+from model.category import Category
 
 
 """
@@ -9,13 +10,15 @@ class Forum(ndb.Model):
     # Forum object can be of 3 types
     #
     # - FORUM ( First message in a forum topic that we call forum )
-    # - MESSAGE ( After the first message ( forum ) , all the others are messages )
-    # - ANNOUNCEMENT ( First foruns in a bolletin board )
+    # - MESSAGE ( After the first message ( forum ) , all the others are messages )    
     #
-    inner_type = ndb.StringProperty(required=True, choices=["FORUM", "MESSAGE", "ANNOUNCEMENT"])
+    inner_type = ndb.StringProperty(required=True, choices=["FORUM", "MESSAGE"])
 
     # Forum tells where this ( message ) is
     forum = ndb.StructuredProperty(Forum)
+
+    # Category
+    category = ndb.StructuredProperty(Category)
 
     # Title of the forum
     title = ndb.StringProperty(required=True)
