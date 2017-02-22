@@ -92,36 +92,58 @@ paths:
           schema:
             $ref: '#/definitions/Error'
           
-  /topics:
+  /forums:
     get:
-      summary: Topics List
-      description: Return the topics
+      summary: Forums List
+      description: Return the forums
       tags:
-        - Topics
+        - Forum
       responses:
         200:
-          description: Array of topics
+          description: Array of forums
           schema: 
             type: array
             items:
-              $ref: '#/definitions/Topic'
+              $ref: '#/definitions/Forum'
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Save an Topic
+      summary: Save an Forum
       description: |
-        Saves a new Topic
+        Saves a new Forum
       tags:
-        - Topics
+        - Forum
       responses:
         200:
-          description: Return the new Topic
+          description: Return the new Forum
           schema:
             type: array
             items:
-              $ref: '#/definitions/Topic'
+              $ref: '#/definitions/Forum'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /forums/{id}:
+    get:
+      summary: Get Forum
+      description: Return a Forum by id
+      tags:
+        - Forum
+      parameters:
+        - name: id
+          in: path
+          type: number
+          format: integer
+          required: true
+      responses:
+        200:
+          description: Return a Forum
+          schema:
+            $ref: '#/definitions/Forum'
         default:
           description: Unexpected error
           schema:
@@ -186,7 +208,7 @@ definitions:
         format: integer
       signature:
         type: string
-      
+        description: Signature of the user
       createdAt: 
         type: string
         description: When user was created
@@ -194,34 +216,41 @@ definitions:
         type: string
         description: When user was updated
       
-  Topic:
+  Forum:
     type: object
     properties:
       id:
         type: string
-        description: Topic ID
+        description: Forum ID
       category:
         $ref: '#/definitions/Category'
       title:
         type: string
-        description: Topic title
+        description: Forum title
+      innerType:
+        type: string
+        enum:
+          - FORUM
+          - MESSAGE
       description:
         type: string
-        description: Topic description
+        description: Forum description
       status:
         type: string
-        description: Topic status
+        description: Forum status
         enum:
           - OPEN
           - CLOSED
       numMessages:
         type: number
         format: integer
-        description: Number of messages on this topic
+        description: Number of messages on this Forum
       numViews:
         type: number
         format: integer
-        description: Number of visualizations on this topic
+        description: Number of visualizations on this Forum
+      createdBy:
+        $ref: '#/definitions/ForumUser'
       createdAt: 
         type: string
         description: When user was created
@@ -229,29 +258,13 @@ definitions:
         type: string
         description: When user was updated
         
-  Forum:
+  SettingsForum:
     type: object
     properties:
-      innerType:
-        type: string
-        enum:
-          - FORUM
-          - ANNOUNCEMENT
-          - MESSAGE
-      title:
-        type: string
-        description: Forum title
-      createdBy:
-        $ref: '#/definitions/ForumUser'
-      description:
-        type: string
-        description: Forum description
-      createdAt: 
-        type: string
-        description: When user was created
-      updatedAt:
-        type: string
-        description: When user was updated
+      showUserSignature:
+        type: boolean
+      
+        
   Error:
     type: object
     properties:
