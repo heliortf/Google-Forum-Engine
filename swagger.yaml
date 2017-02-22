@@ -1,0 +1,149 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Forum Engine API
+  description: Forum Engine API 
+  version: "1.0.0"
+# the domain of the service
+host: gforum-engine.appspot.com
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api/v1
+produces:
+  - application/json
+paths:
+  /categories:
+    get:
+      summary: Category List
+      description: |
+        Return the list of categories
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          description: Identifies the user
+      tags:
+        - Category
+      responses:
+        200:
+          description: Array of Category
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Save a Category
+      description: |
+        Saves a new Category
+      
+      tags:
+        - Category
+      responses:
+        200:
+          description: Return the new Category
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /users:
+    get:
+      summary: Users List
+      description: Return the users
+      tags:
+        - Users
+      responses:
+        200:
+          description: Array of users
+          schema: 
+            type: array
+            items:
+              $ref: '#/definitions/ForumUser'
+          
+definitions:
+
+  Category:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Category name
+      description:
+        type: string
+        description: Description of the category
+      parentCategory:
+        $ref: '#/definitions/Category'
+      dataTroca:
+        type: string
+        description: Data que foi realizada a troca
+      produtosRecebidos:
+        type: array
+        items:
+          $ref: '#/definitions/Category'
+      valorDiferenca:
+        type: number
+        format: double
+      dataCriacao:
+        type: string
+        description: Data da criação do registro da troca
+    
+  ForumUser:
+    type: object
+    properties:
+      id:
+        type: string
+        description: ID of the user
+      name:
+        type: string
+        description: Name of the User
+      password:
+        type: string
+        description: Password
+      email:
+        type: string
+        description: E-mail do usuario
+      status:
+        type: string
+        description: User status
+        enum:
+          - ACTIVE
+          - INACTIVE
+      source:
+        type: string
+        description: Where this user came from?
+        enum:
+          - FORUM
+          - FACEBOOK
+          - GOOGLE
+      numMessages:
+        type: number
+        format: integer
+      createdAt: 
+        type: string
+        description: When user was created
+      updatedAt:
+        type: string
+        description: When user was updated
+      
+      
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
