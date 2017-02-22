@@ -70,7 +70,62 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ForumUser'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Save an User
+      description: |
+        Saves a new User
+      tags:
+        - Users
+      responses:
+        200:
+          description: Return the new User
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ForumUser'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
           
+  /topics:
+    get:
+      summary: Topics List
+      description: Return the topics
+      tags:
+        - Topics
+      responses:
+        200:
+          description: Array of topics
+          schema: 
+            type: array
+            items:
+              $ref: '#/definitions/Topic'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Save an Topic
+      description: |
+        Saves a new Topic
+      tags:
+        - Topics
+      responses:
+        200:
+          description: Return the new Topic
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Topic'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
 
   Category:
@@ -136,7 +191,40 @@ definitions:
         type: string
         description: When user was updated
       
-      
+  Topic:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Topic ID
+      category:
+        $ref: '#/definitions/Category'
+      title:
+        type: string
+        description: Topic title
+      description:
+        type: string
+        description: Topic description
+      status:
+        type: string
+        description: Topic status
+        enum:
+          - OPEN
+          - CLOSED
+      numMessages:
+        type: number
+        format: integer
+        description: Number of messages on this topic
+      numViews:
+        type: number
+        format: integer
+        description: Number of visualizations on this topic
+      createdAt: 
+        type: string
+        description: When user was created
+      updatedAt:
+        type: string
+        description: When user was updated
   Error:
     type: object
     properties:
