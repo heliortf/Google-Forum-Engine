@@ -15,6 +15,18 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'users',
+        data: {
+          menu: {
+            title: 'Users',
+            icon: 'ion-person-stalker',
+            selected: false,
+            expanded: false,
+            order: 30
+          }
+        }
+      },
+      {
         path: 'editors',
         data: {
           menu: {

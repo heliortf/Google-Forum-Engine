@@ -19,6 +19,7 @@ export const routes: Routes = [
     component: Pages,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'users', loadChildren: 'app/pages/users/users.module#UsersModule' },
       { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule' },
       { path: 'editors', loadChildren: 'app/pages/editors/editors.module#EditorsModule' },
       { path: 'components', loadChildren: 'app/pages/components/components.module#ComponentsModule' },
