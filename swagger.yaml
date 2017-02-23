@@ -172,6 +172,25 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+    delete:
+      summary: Delete a Forum
+      description: Delete a forum by its id
+      tags:
+        - Forum
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: Return the sucessful operation
+          schema:
+            $ref: '#/definitions/Success'
+        default:
+          description: Retorn the error object
+          schema:
+            $ref: '#/definitions/Error'
             
   /settings/forum:
     get:
@@ -305,6 +324,15 @@ definitions:
       showUserSignature:
         type: boolean
       
+  Success:
+    type: object
+    properties:
+      response: 
+        type: string
+        enum:
+          - success
+      description:
+        type: string
         
   Error:
     type: object
