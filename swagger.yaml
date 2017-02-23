@@ -241,9 +241,15 @@ definitions:
       id:
         type: string
         description: ID of the user
-      name:
+      firstName:
         type: string
-        description: Name of the User
+        description: First Name of the User
+      lastName:
+        type: string
+        description: Last Name of the User
+      userName:
+        type: string
+        description: Username of the User
       password:
         type: string
         description: Password
