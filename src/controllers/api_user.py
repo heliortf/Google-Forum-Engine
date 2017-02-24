@@ -1,7 +1,7 @@
 
 from flask import request
 from src import app
-from model.user import ForumUser
+from src.model.user import ForumUser
 from src.config.constants import DEFAULT_PER_PAGE
 import json
 
@@ -41,19 +41,25 @@ def users():
         # Json to be returned
         json_list = []
 
+        # Adds each user at json list
         for user in list_users.iter():
             json_list.append(user.to_json)
-
+        
+        # Return json object
         return json.dumps(json_list)
 
 
-@app.route('/api/v1/users/<id>', methods=['GET'])
+@app.route('/api/v1/users/<id>', methods=['GET', 'PUT', 'DELETE'])
 def user(id):
     """
         Return an user from its id
     """
-    
-    return "user! "+id
-
-@app.route('/api/v1/users/<id>', methods=[])
-
+    if request.method == 'GET':    
+        return "user! "+id    
+    elif request.method == 'PUT':
+        """
+            Updates an user by its id
+        """
+        return "success"
+    elif request.method == 'DELETE':
+        return "deleted"
