@@ -4,11 +4,11 @@ import json
 """
     Users Model
 """
-class ForumUser(ndb.Model):
+class ForumUser(ndb.Model):    
     firstname = ndb.StringProperty(required=True)
     lastname = ndb.StringProperty()
     email = ndb.StringProperty(required=True)
-    login = ndb.StringProperty(required=True)
+    login = ndb.StringProperty(required=True, indexed=True)
     password = ndb.StringProperty(required=True)
     source = ndb.StringProperty(required=True)
     num_messages = ndb.IntegerProperty()

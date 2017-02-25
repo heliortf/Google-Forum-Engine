@@ -4,7 +4,7 @@
 # the App Engine WSGI application server.
 from src import app
 
-@app.route('/')
+@app.route('/hello-world')
 def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello World!'

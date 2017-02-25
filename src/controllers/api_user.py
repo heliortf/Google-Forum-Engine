@@ -95,7 +95,7 @@ def user(id):
     """
     if request.method == 'GET':    
         # List of Users
-        list_users = ForumUser.query(ForumUser.id == id).fetch(1)
+        list_users = ForumUser.query(ForumUser.login == id).fetch(1)
 
         if len(list_users) == 1:
             return json_dumps(list_users[0].to_json())
@@ -106,7 +106,7 @@ def user(id):
             Updates an user by its id
         """
         # List of Users
-        list_users = ForumUser.query(ForumUser.id == id).fetch(1)
+        list_users = ForumUser.query(ForumUser.login == id).fetch(1)
 
         # If found user
         if len(list_users) == 1:
@@ -121,7 +121,7 @@ def user(id):
 
     elif request.method == 'DELETE':
         # List of Users
-        list_users = ForumUser.query(ForumUser.id == id).fetch(1)
+        list_users = ForumUser.query(ForumUser.login == id).fetch(1)
 
         if len(list_users) == 1:
             list_users[0].delete()
