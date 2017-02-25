@@ -1,0 +1,1 @@
+* Create script that compiles the angular template and put it in templates folder - use gulp
