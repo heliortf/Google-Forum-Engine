@@ -20,15 +20,19 @@ class ForumUser(ndb.Model):
         Transforms the object in a JSON
     """
     def to_json(self):
-        return {
-            firstName: self.firstname,
-            lastName: self.lastname,
-            email: self.email,
-            login: self.login,
-            password: self.password,
-            source: self.source,
-            numMessages: self.num_messages,
-            createdAt: self.created_at,
-            updatedAt: self.updated_at
+        obj = {
+            "firstName": self.firstname,
+            "lastName": self.lastname,
+            "email": self.email,
+            "login": self.login,
+            "password": self.password,
+            "source": self.source,
+            "numMessages": self.num_messages,
+            "createdAt": self.created_at.isoformat()            
         }
+
+        # Updated at is only defined when user is updated
+        obj["updatedAt"] = "" if self.updated_at == None else self.updated_at.isoformat()
+
+        return obj
 
