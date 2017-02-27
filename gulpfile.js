@@ -43,7 +43,7 @@ gulp.task('build-template', function(){
  * After cleaning the public folder
  */
 gulp.task('copy-template-to-public', ['clean-public-folder'], function(){
-    return gulp.src(outputAngular2+'/*')
+    return gulp.src(outputAngular2+'/**/*')
               .pipe(gulp.dest(outputFolder))
 });
 

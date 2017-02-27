@@ -10,8 +10,10 @@ class ForumUser(ndb.Model):
     email = ndb.StringProperty(required=True)
     login = ndb.StringProperty(required=True, indexed=True)
     password = ndb.StringProperty(required=True)
-    source = ndb.StringProperty(required=True)
+    source = ndb.StringProperty(required=True, choices=["GOOGLE", "FACEBOOK", "FORUM"])
     num_messages = ndb.IntegerProperty()
+    status = ndb.StringProperty(choices=["ACTIVE", "INACTIVE"])
+    signature = ndb.StringProperty()
     created_at = ndb.DateTimeProperty(auto_now_add=True)
     updated_at = ndb.DateTimeProperty()
 

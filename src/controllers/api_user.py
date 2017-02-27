@@ -122,6 +122,7 @@ def users():
         return json.dumps({ 
             "code":200, 
             "response":"success",
+            "resource":"users",
             "paging" : {
                 "total" : total,
                 "page" : page,

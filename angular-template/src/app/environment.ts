@@ -2,6 +2,8 @@
 // rc2 workaround
 import { enableDebugTools, disableDebugTools } from '@angular/platform-browser';
 import { enableProdMode, ApplicationRef } from '@angular/core';
+import { UsersApi } from './swagger/index'
+
 // Environment Providers
 let PROVIDERS: any[] = [
   // common env directives
@@ -37,7 +39,8 @@ if ('production' === ENV || 'renderer' === ENV) {
   // Development
   PROVIDERS = [
     ...PROVIDERS,
-    // custom providers in development
+    // custom providers in development    
+    UsersApi
   ];
 
 }
@@ -45,5 +48,5 @@ if ('production' === ENV || 'renderer' === ENV) {
 export const decorateModuleRef = _decorateModuleRef;
 
 export const ENV_PROVIDERS = [
-  ...PROVIDERS
+  ...PROVIDERS,
 ];
