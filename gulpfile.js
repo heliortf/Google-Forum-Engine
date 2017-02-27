@@ -39,18 +39,11 @@ gulp.task('build-template', function(){
       .pipe(gulp.dest('output'));
 });
 
-/**
- * After cleaning the public folder
- */
-gulp.task('copy-template-to-public', ['clean-public-folder'], function(){
-    return gulp.src(outputAngular2+'/**/*')
-              .pipe(gulp.dest(outputFolder))
-});
 
 /**
  * Runs build template and copy template to public tasks
  */
-gulp.task('gae-build', ['build-template', 'copy-template-to-public'], function(){
+gulp.task('gae-build', ['build-template'], function(){
     if(project == null){
         console.log("Tell me the GAE ID of the project ( gulp run gae-build --project xxx --project-version yy)");
         return false;

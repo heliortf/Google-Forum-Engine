@@ -9,7 +9,7 @@ threadsafe: yes
 
 # Handlers define how to route requests to your application.
 handlers:
-- url: /public/*
+- url: /.*\.?(js|png|woff|css|scss|json)?
   static_dir: public
 
 # App Engine serves and caches static files contained in the listed directories
