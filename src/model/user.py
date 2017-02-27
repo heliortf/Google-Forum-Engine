@@ -21,11 +21,12 @@ class ForumUser(ndb.Model):
     """
     def to_json(self):
         obj = {
+            "id" : self.key.id(),
             "firstName": self.firstname,
             "lastName": self.lastname,
             "email": self.email,
             "login": self.login,
-            "password": self.password,
+            #"password": self.password,
             "source": self.source,
             "numMessages": self.num_messages,
             "createdAt": self.created_at.isoformat()            
@@ -36,3 +37,10 @@ class ForumUser(ndb.Model):
 
         return obj
 
+    """
+        Searches an user by its ID
+    """
+    @staticmethod
+    def find_by_id(id):
+        key = ndb.Key('ForumUser', id)
+        return key.get()

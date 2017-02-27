@@ -38,6 +38,7 @@ skip_files:
 - ^.git$
 - ^.gitignore$
 - ^angular-template
+- ^node_modules
 - ^(.*/)?.*\.py[co]$
 - ^(.*/)?.*\.coffee$
 - ^(.*/)?.*\.sass$

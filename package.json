@@ -1,0 +1,26 @@
+{
+  "name": "forum-engine",
+  "version": "1.0.0",
+  "description": "A skeleton for building Python applications on Google App Engine with the [Flask micro framework](http://flask.pocoo.org).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heliortf/Google-Forum-Engine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heliortf/Google-Forum-Engine/issues"
+  },
+  "homepage": "https://github.com/heliortf/Google-Forum-Engine#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-gae": "0.0.4",
+    "gulp-run": "^1.7.1",
+    "yargs": "^6.6.0"
+  }
+}
