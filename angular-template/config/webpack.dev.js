@@ -170,7 +170,7 @@ module.exports = function (options) {
         options: {
           context: helpers.root('src'),
           output: {
-            path: helpers.root('dist')
+            path: helpers.root('dist')+'/../../public'
           },
 
           /**
