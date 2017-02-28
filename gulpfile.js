@@ -43,7 +43,7 @@ gulp.task('angular-build-watch', function(){
             .pipe(gulp.dest('output'));
 })
 
-gulp.task('gae-remove-template', function(){
+gulp.task('gae-remove-html', function(){
     return gulp.src('./src/templates/index.html').pipe(clean());
 });
 
@@ -55,8 +55,8 @@ gulp.task('gae-copy-html', function(){
 
 // DEV: Watch for changes on index.html at public folder and keep copying to templates folder
 gulp.task('gae-watch', function(){
-    let watcher = gulp.watch([outputFolder+'/index.html'], ['build-remove-template', 'build-template-index']);
-    watcher.on('change', function(){
+    let watcher = gulp.watch([outputFolder+'/index.html'], ['gae-remove-html', 'gae-copy-html']);
+    watcher.on('change', function(event){
         console.log('File ' + event.path + ' was ' + event.type + ', copying template...');
     });    
 });
@@ -85,7 +85,8 @@ gulp.task('gae-deploy', ['gae-build'], function(){
 
 
 
-gulp.task('gae-devserver', ['build-template-watch'], function(){
+gulp.task('gae-server', ['gae-watch'], function(){
   return run('dev_appserver.py %cd% ', { verbosity: 3 }).exec()
               .pipe(gulp.dest('output'));
 });
+

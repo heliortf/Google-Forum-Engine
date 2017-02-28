@@ -49,3 +49,4 @@ skip_files:
 - ^(.*/)?bower\.json$
 - ^(.*/)?package\.json$
 - ^(.*/)?component\.json$
+- ^(.*/)?.*\.jar

@@ -24,6 +24,9 @@
               <td>{{ user.email }}</td>
               <td>{{ user.createdAt }}</td>
             </tr>
+            <tr *ngIf="usersList.length == 0">
+              <td colspan="6">No records found</td>
+            </tr>
             </tbody>
           </table>
         </div>

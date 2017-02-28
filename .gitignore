@@ -6,3 +6,4 @@ node_modules
 /public/*
 /output/*
 npm-debug.log*
+*.jar

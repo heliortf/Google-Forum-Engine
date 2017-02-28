@@ -18,6 +18,6 @@ export class UsersList implements OnInit {
   }
 
   ngOnInit(){
-     this.api.usersGet().subscribe((users) => this.usersList = users);
+     this.api.usersGet().subscribe((users) => this.usersList = users.records);
   }
 }
