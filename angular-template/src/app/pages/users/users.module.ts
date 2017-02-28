@@ -7,6 +7,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { routing }       from './users.routing';
 import { Users } from './users.component';
 import { UsersList } from './components/usersList/usersList.component';
+import { UsersApi } from './../../swagger/index'
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { UsersList } from './components/usersList/usersList.component';
     UsersList
   ],
   providers: [
-    
+    UsersApi
   ]
 })
 export class UsersModule {

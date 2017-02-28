@@ -28,9 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class UsersApi {
     protected basePath = 'http://localhost:8080/api/v1';
-    public defaultHeaders: Headers = new Headers({
-        'Access-Control-Allow-Origin' : '*'
-    });
+    public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
     constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {

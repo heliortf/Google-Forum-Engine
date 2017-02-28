@@ -9,8 +9,9 @@ threadsafe: yes
 
 # Handlers define how to route requests to your application.
 handlers:
-- url: /.*\.?(js|png|woff|css|scss|json)?
-  static_dir: public
+- url: /(.*\.(gif|png|jpg|woff|js|svg|woff2|css|ttf))$
+  static_files: public/\1
+  upload: public/.*\.(gif|png|jpg|woff|js|svg|woff2|css|ttf)$  
 
 # App Engine serves and caches static files contained in the listed directories
 # (and subdirectories). Uncomment and set the directory as needed.

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ForumUser, UsersApi } from './../../../../swagger/index'
+import { UsersApi } from './../../../../swagger/index'
 
 import 'style-loader!./usersList.scss';
 
@@ -13,14 +13,11 @@ export class UsersList implements OnInit {
 
   protected usersList = [];
 
-  constructor(protected api: UsersApi) {
+  constructor(public api : UsersApi) {
     
   }
 
   ngOnInit(){
-    this.api.usersGet().subscribe((usuarios) => {
-       console.log("Consultou!");
-       console.log(usuarios);
-    });
+     this.api.usersGet().subscribe((users) => this.usersList = users);
   }
 }
