@@ -7,3 +7,5 @@ node_modules
 /output/*
 npm-debug.log*
 *.jar
+swagger-temp.yaml
+angular-template/src/app/swagger/

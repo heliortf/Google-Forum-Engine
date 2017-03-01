@@ -67,9 +67,7 @@ paths:
         200:
           description: Array of users
           schema: 
-            type: array
-            items:
-              $ref: '#/definitions/SuccessList'
+            $ref: '#/definitions/ForumUsersList'
         default:
           description: Unexpected error
           schema:
@@ -407,14 +405,17 @@ definitions:
       description:
         type: string
         
-  SuccessList:
+  ForumUsersList:
     type: object
     properties:
       pagination:
         $ref: '#/definitions/Pagination'
       records:
-        type: object
-        description: List of *
+        type: array
+        description: List of Users
+        items:
+          $ref: '#/definitions/ForumUser'
+        
       resource:
         type: string
         description: Name of the resource beeing returned

@@ -19,7 +19,10 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
+    "gulp-download": "0.0.1",
     "gulp-gae": "0.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-run": "^1.7.1",
     "yargs": "^6.6.0"
   }

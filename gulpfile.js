@@ -1,7 +1,11 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var run = require('gulp-run');
 var clean = require('gulp-clean');
 var argv = require('yargs').argv;
+var download = require('gulp-download');
+var replace = require('gulp-replace');
+var rename = require('gulp-rename');
 
 // Templates Folder that will be uploaded
 var outputFolder = './public';
@@ -13,12 +17,20 @@ var project = null;
 // Version of the project on gae
 var version = null;
 
+// Swagger API information
+var deployURL = 'gforumengine.appspot.com';
+var localURL = 'localhost:8080';
+var deploying = false;
 
+// If pass project through command line
 if(typeof argv.project !== 'undefined' && argv.project != ''){
+  deploying = true;
   project = argv.project;
 }
 
+// If pass project-version through command line
 if(typeof argv['project-version'] !== 'undefined' && argv['project-version'] != ''){
+    deploying = true;
   version = argv['project-version'];
 }
 
@@ -39,7 +51,7 @@ gulp.task('angular-build', ['clean-public-folder'], function(){
 
 // DEV: Build the angular template and keep watching for changes
 gulp.task('angular-build-watch', function(){
-    return run('cd angular-template && npm run watch:dev', { verbosity: 3 }).exec()
+    return run('cd angular-template && npm run server:dev', { verbosity: 3 }).exec()
             .pipe(gulp.dest('output'));
 })
 
@@ -64,7 +76,7 @@ gulp.task('gae-watch', function(){
 /**
  * Runs build template and copy template to public tasks
  */
-gulp.task('gae-build', ['build-template'], function(){
+gulp.task('gae-build', ['angular-build'], function(){
 
 });
 
@@ -90,3 +102,46 @@ gulp.task('gae-server', ['gae-watch'], function(){
               .pipe(gulp.dest('output'));
 });
 
+gulp.task('swagger-check', function(){
+    if(!fs.existsSync('swagger-codegen-cli-2.2.1.jar')){
+        console.log("Download Swagger Code Gen first! Run gulp swagger-download");
+        process.exit();
+    }
+});
+
+gulp.task('swagger-download', ['swagger-check'], function(){
+    download("https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.2.1/swagger-codegen-cli-2.2.1.jar")
+        .pipe(gulp.dest('./'));
+});
+
+// Clean swagger folder
+gulp.task('swagger-clean', ['swagger-check'], function(){
+    return gulp.src('./angular-template/src/app/swagger/*', { read : false }).pipe(clean());
+});
+
+// Copy the swagger.yaml to a temporary file with changes
+gulp.task('swagger-copy', function(){
+    // If its not deploying, its a local server
+    if(deploying == false){
+        return gulp.src('swagger.yaml')
+            .pipe(replace('gforumengine.appspot.com', localURL))
+            .pipe(rename('swagger-temp.yaml'))
+            .pipe(gulp.dest('.'));
+    }
+    else {
+        return gulp.src('swagger.yaml')
+                .pipe(rename('swagger-temp.yaml'))
+                .pipe(gulp.dest('.'));
+    }
+});
+
+// Compile new swagger files according to spec
+gulp.task('swagger-compile', ['swagger-clean', 'swagger-copy'], function(){
+    return run('java -jar swagger-codegen-cli-2.2.1.jar generate -i swagger-temp.yaml -l typescript-angular2 -o ./angular-template/src/app/swagger/', { verbosity: 3 }).exec()
+            .pipe(gulp.dest('./output'))
+});
+
+// Removes the temporary yaml
+gulp.task('swagger-build', ['swagger-compile'], function(){
+    gulp.src('swagger-temp.yaml').pipe(clean());
+});
