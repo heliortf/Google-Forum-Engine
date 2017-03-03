@@ -123,7 +123,7 @@ def users():
             "code":200, 
             "response":"success",
             "resource":"users",
-            "paging" : {
+            "pagination" : {
                 "total" : total,
                 "page" : page,
                 "pages" : total_pages,

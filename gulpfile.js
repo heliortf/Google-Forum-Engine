@@ -51,7 +51,7 @@ gulp.task('angular-build', ['clean-public-folder'], function(){
 
 // DEV: Build the angular template and keep watching for changes
 gulp.task('angular-build-watch', function(){
-    return run('cd angular-template && npm run server:dev', { verbosity: 3 }).exec()
+    return run('cd angular-template && npm run watch:dev:hmr', { verbosity: 3 }).exec()
             .pipe(gulp.dest('output'));
 })
 
@@ -76,11 +76,11 @@ gulp.task('gae-watch', function(){
 /**
  * Runs build template and copy template to public tasks
  */
-gulp.task('gae-build', ['angular-build'], function(){
+gulp.task('gae-build', ['angular-build', 'gae-copy-html'], function(){
 
 });
 
-gulp.task('gae-deploy', ['gae-build'], function(){
+gulp.task('gae-deploy', ['swagger-build', 'gae-build', 'gae-copy-html'], function(){
     if(project == null){
         console.log("Tell me the GAE ID of the project ( gulp run gae-build --project xxx --project-version yy)");
         return false;
@@ -97,7 +97,7 @@ gulp.task('gae-deploy', ['gae-build'], function(){
 
 
 
-gulp.task('gae-server', ['gae-watch'], function(){
+gulp.task('gae-server', ['swagger-build', 'gae-watch'], function(){
   return run('dev_appserver.py %cd% ', { verbosity: 3 }).exec()
               .pipe(gulp.dest('output'));
 });

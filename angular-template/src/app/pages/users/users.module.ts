@@ -8,12 +8,14 @@ import { Users } from './users.component';
 import { UsersList } from './components/usersList/usersList.component';
 import { UsersApi, UserApi } from './../../swagger/index'
 import { UserDetail } from './components/userDetail/userDetail.component';
+import { FePaginationModule } from './../fepagination/fepagination.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgaModule,
+    FePaginationModule,
     routing
   ],
   declarations: [

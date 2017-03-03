@@ -8,11 +8,11 @@ import { UserDetail } from './components/userDetail/index';
 const routes: Routes = [
   {
     path: '',
-    component: UsersList
-  },
-  {
-    path: ':id',
-    component: UserDetail
+    component: Users,
+    children: [
+      { path: '', component: UsersList },
+      { path: ':id', component: UserDetail }
+    ]
   }
 ];
 
