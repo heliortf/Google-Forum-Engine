@@ -107,3 +107,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color-1', endColorstr='$color-3',GradientType=1); /* IE6-9 fallback on horizontal gradient */
 
 }
+
+@import './mixins/border-radius';
+@import './mixins/hover';
+@import './mixins/pagination';

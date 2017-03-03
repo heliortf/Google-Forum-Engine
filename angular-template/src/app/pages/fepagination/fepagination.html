@@ -1,11 +1,11 @@
-<ul class="pagination">
+<ul class="pagination fe-pagination">
     <li>
-        <a><span class="ion-chevron-left"></span>&nbsp;Prev</a>
+        <a (click)="prev()"><span class="ion-chevron-left"></span>&nbsp;Prev</a>
     </li>
     <li *ngFor="let p of pages" [ngClass]="{'active' : p == pagination?.page }">
         <a>{{p}}</a>
     </li>
     <li>
-        <a><span class="ion-chevron-right"></span>&nbsp;Next</a>
+        <a (click)="next()">Next&nbsp;<span class="ion-chevron-right"></span>&nbsp;</a>
     </li>
 </ul>

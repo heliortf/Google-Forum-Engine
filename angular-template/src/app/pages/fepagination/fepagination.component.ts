@@ -13,7 +13,7 @@ import 'style-loader!./fepagination.scss';
 })
 export class FePagination implements OnInit {
   // Emitter that will tell when page changes
-  protected emitter : EventEmitter<string>;
+  protected emitter : EventEmitter<any>;
 
   // Pagination object received  
   protected pagination : Pagination; 
@@ -61,7 +61,7 @@ export class FePagination implements OnInit {
 
       // Reset the array of pages
       this.pages = [];
-      console.log("Begin = "+begin+" end = "+end); 
+      
       // Iterate and add pages
       for(let i = begin;i<=end;i++){
           this.pages.push(i);
@@ -73,5 +73,21 @@ export class FePagination implements OnInit {
     
   }
 
-  
+  view(page){
+    if(this.pagination.page != page){
+      this.emitter.emit({"page" : page });
+    }
+  }
+
+  next(){
+    if(this.pagination.page < this.pagination.pages){
+      this.view(this.pagination.page + 1);
+    }
+  } 
+
+  prev(){
+    if(this.pagination.page > 1){
+      this.emitter.emit({"page" : (this.pagination.page - 1)});
+    }
+  } 
 }
