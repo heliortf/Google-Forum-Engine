@@ -2,7 +2,7 @@
     <li>
         <a (click)="prev()"><span class="ion-chevron-left"></span>&nbsp;Prev</a>
     </li>
-    <li *ngFor="let p of pages" [ngClass]="{'active' : p == pagination?.page }">
+    <li *ngFor="let p of pages" [ngClass]="{'active' : p == pagination?.page }" (click)="view(p)">
         <a>{{p}}</a>
     </li>
     <li>

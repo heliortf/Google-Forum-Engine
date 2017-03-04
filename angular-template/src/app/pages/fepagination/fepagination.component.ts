@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Pagination } from './../../swagger/index'
 
 import 'style-loader!./fepagination.scss';
@@ -12,7 +12,9 @@ import 'style-loader!./fepagination.scss';
   templateUrl: './fepagination.html'
 })
 export class FePagination implements OnInit {
+
   // Emitter that will tell when page changes
+  @Output('pageChange')
   protected emitter : EventEmitter<any>;
 
   // Pagination object received  
@@ -73,18 +75,21 @@ export class FePagination implements OnInit {
     
   }
 
+  // Triggers visualization
   view(page){
     if(this.pagination.page != page){
       this.emitter.emit({"page" : page });
     }
   }
 
+  // When click to next page
   next(){
     if(this.pagination.page < this.pagination.pages){
       this.view(this.pagination.page + 1);
     }
   } 
 
+  // When click to previous page
   prev(){
     if(this.pagination.page > 1){
       this.emitter.emit({"page" : (this.pagination.page - 1)});
