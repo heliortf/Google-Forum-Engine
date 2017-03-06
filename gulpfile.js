@@ -43,7 +43,7 @@ gulp.task('clean-public-folder', function(){
 
 // PROD: Build the angular template 
 gulp.task('angular-build', ['clean-public-folder'], function(){
-    return run('cd angular-template && npm run prebuild:prod && npm run build:prod', {
+    return run('cd angular-template && npm run build:prod', {
       verbosity : 3
     }).exec()
       .pipe(gulp.dest('output'));
@@ -66,7 +66,7 @@ gulp.task('gae-copy-html', function(){
 });
 
 // DEV: Watch for changes on index.html at public folder and keep copying to templates folder
-gulp.task('gae-watch', function(){
+gulp.task('gae-watch', ['gae-remove-html', 'gae-copy-html'], function(){
     let watcher = gulp.watch([outputFolder+'/index.html'], ['gae-remove-html', 'gae-copy-html']);
     watcher.on('change', function(event){
         console.log('File ' + event.path + ' was ' + event.type + ', copying template...');
@@ -97,7 +97,7 @@ gulp.task('gae-deploy', ['swagger-build', 'gae-build', 'gae-copy-html'], functio
 
 
 
-gulp.task('gae-server', ['swagger-build', 'gae-watch'], function(){
+gulp.task('gae-server', ['gae-watch'], function(){
   return run('dev_appserver.py %cd% ', { verbosity: 3 }).exec()
               .pipe(gulp.dest('output'));
 });

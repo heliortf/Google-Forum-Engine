@@ -5,6 +5,7 @@ from src.model.user import ForumUser
 from src.config.constants import DEFAULT_PER_PAGE
 import math
 import json
+import datetime
 
 def validate_user_object(decodedUser, action):
     # Validate user received data
@@ -190,14 +191,13 @@ def user(id):
                     elif attr == "numMessages":
                         setattr(user, "num_messages", decodedUser[attr])
 
-                    elif attr == "createdAt":
-                        setattr(user, "created_at", decodedUser[attr])
-                    
-                    elif attr == "updatedAt":                        
-                        setattr(user, "updated_at", decodedUser[attr])
+                    elif attr == "createdAt" or attr == "updatedAt":
+                        continue
                     else:
                         setattr(user, attr, decodedUser[attr])
 
+
+                user.updated_at = datetime.datetime.now()
                 user.put()
                 
                 # Usuario recebido

@@ -12,27 +12,43 @@ import 'style-loader!./userEdit.scss';
 })
 export class UserEdit implements OnInit {
 
-  protected userId : number;
-  protected user : ForumUser;
-  protected statusList : any = [];
+  protected userId: number;
+  protected user: ForumUser;
+  protected statusList: any = [];
 
-  constructor(protected api : UserApi, protected route : ActivatedRoute ) {
-    for(let value in ForumUser.StatusEnum) {
+  constructor(protected api: UserApi, protected route: ActivatedRoute) {
+    this.user = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      userName: "",
+      password: "",
+      signature: ""
+    };
+    for (let value in ForumUser.StatusEnum) {
       this.statusList.push(value);
     }
   }
 
-  ngOnInit(){
+  ngOnInit() {
     // Get User ID from route
     this.userId = this.route.snapshot.params['id'];
 
     // If id is a valid integer
-    if(!isNaN(this.userId) && this.userId > 0){
-        // Searches the user
-        this.api.usersIdGet(this.userId).subscribe((user) => this.user = user)
+    if (!isNaN(this.userId) && this.userId > 0) {
+      // Searches the user
+      this.api.usersIdGet(this.userId).subscribe((user) => this.user = user)
     }
     else {
-        console.log("No ID received");
+      console.log("No ID received");
     }
+  }
+
+  // Updates the user
+  update() {
+    // Updates the user
+    this.api.usersIdPut(this.userId.toString(), this.user).subscribe((user) => {
+      // Shows success message      
+    });
   }
 }
