@@ -23,7 +23,8 @@ export class UserEdit implements OnInit {
       email: "",
       userName: "",
       password: "",
-      signature: ""
+      signature: "",
+      status:ForumUser.StatusEnum.ACTIVE
     };
     for (let value in ForumUser.StatusEnum) {
       this.statusList.push(value);

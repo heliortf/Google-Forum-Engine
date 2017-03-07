@@ -27,7 +27,7 @@ class ForumUser(ndb.Model):
             "firstName": self.firstname,
             "lastName": self.lastname,
             "email": self.email,
-            "login": self.login,
+            "userName": self.login,
             #"password": self.password,
             "source": self.source,
             "numMessages": self.num_messages,
