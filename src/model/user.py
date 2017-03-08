@@ -38,11 +38,3 @@ class ForumUser(ndb.Model):
         obj["updatedAt"] = "" if self.updated_at == None else self.updated_at.isoformat()
 
         return obj
-
-    """
-        Searches an user by its ID
-    """
-    @staticmethod
-    def find_by_id(id):
-        key = ndb.Key('ForumUser', id)
-        return key.get()
