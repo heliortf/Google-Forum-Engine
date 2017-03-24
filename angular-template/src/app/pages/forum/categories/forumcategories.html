@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Topics</th>
+            <th>Posts</th>
+            <th>Last Post</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cat in categories">
+            <td>{{ cat.name }}</td>
+            <td>{{ cat.numTopics }}</td>
+            <td>{{ cat.numPosts }}</td>
+            <td>
+                <a href="">{{ cat.lastPost.title }}</a><br/>
+                by {{ cat.lastPost.user.firstName }}
+            </td>
+        </tr>
+    </tbody>
+</table>
